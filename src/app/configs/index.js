@@ -3,7 +3,7 @@ const configs = {
     port: process.env.PORT || 8080
   },
   mongodb: {
-    debug: process.env.MONGODB_DEBUG || true
+    debug: process.env.MONGODB_DEBUG || false
   },
   express: {
     requestLimit: {

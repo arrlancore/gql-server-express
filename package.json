@@ -10,7 +10,8 @@
     "test:watch": "jest --watch --coverage",
     "start:test": "cross-env NODE_ENV=test MONGODB_DEBUG=true npm start",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
-    "fix:lint": "eslint '**/*.js' --ignore-pattern node_modules/ --fix"
+    "fix:lint": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
+    "seed": "babel-node seeds/index.js"
   },
   "keywords": [],
   "author": "",

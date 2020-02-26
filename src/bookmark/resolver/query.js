@@ -1,6 +1,6 @@
 import utils from '../../shared/utils';
 
-export const messagesResolver = async (parent, args, { models }) => {
+export const bookmarksResolver = async (parent, args, { models }) => {
   const { limit = 25, offset = 0, orderBy = '-createdAt', cursor } = args;
   const cursorOptions = cursor
     ? {
@@ -15,15 +15,15 @@ export const messagesResolver = async (parent, args, { models }) => {
     findOptions.skip = offset;
   }
 
-  const messages = await models.Message.find(
+  const list = await models.Bookmark.find(
     { ...cursorOptions },
     null,
     findOptions
-  ).populate('user');
+  ).populate('createdBy');
 
-  const messagesLength = messages.length;
-  const hasNextPage = messagesLength > limit;
-  const edges = hasNextPage ? messages.slice(0, -1) : messages;
+  const listLength = list.length;
+  const hasNextPage = listLength > limit;
+  const edges = hasNextPage ? list.slice(0, -1) : list;
   const endCursor = edges[edges.length - 1]?.createdAt || 0;
 
   const pageInfo = {
@@ -34,7 +34,8 @@ export const messagesResolver = async (parent, args, { models }) => {
   return { edges, pageInfo };
 };
 
-export const messageResolver = async (parent, { id }, { models }) => {
-  const message = await models.Message.findById(id).populate('user');
-  return message;
+export const bookmarkResolver = async (parent, { id }, { models }) => {
+  const bookmark = await models.Bookmark.findById(id).populate('createdBy');
+
+  return bookmark;
 };

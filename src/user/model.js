@@ -28,6 +28,65 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: 'USER'
   },
+  bio: {
+    type: String,
+    maxlength: 100
+  },
+  profileImageUrl: {
+    type: String,
+    maxlength: 100
+  },
+  links: {
+    github: {
+      type: String,
+      maxlength: 100
+    },
+    twitter: {
+      type: String,
+      maxlength: 100
+    },
+    website: {
+      type: String,
+      maxlength: 100
+    },
+    blog: {
+      type: String,
+      maxlength: 100
+    }
+  },
+  address: {
+    provinsi: {
+      type: String,
+      maxlength: 50
+    },
+    kotaKabupaten: {
+      type: String,
+      maxlength: 50
+    }
+  },
+  skills: {
+    language: {
+      type: String,
+      maxlength: 100
+    },
+    tools: {
+      type: String,
+      maxlength: 100
+    }
+  },
+  userProvider: {
+    type: String,
+    maxlength: 100
+  },
+  userProviderToken: {
+    type: String,
+    maxlength: 255
+  },
+  status: {
+    type: String,
+    default: 'PENDING',
+    enum: ['PENDING', 'SUSPENSE', 'VERIFIED']
+  },
   createdAt: {
     type: Date,
     default: Date.now

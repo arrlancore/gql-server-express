@@ -15,8 +15,8 @@ import utils from '../../shared/utils';
 
 const messageResolvers = {
   Query: {
-    messages: combineResolvers(isAuthenticated, messagesResolver),
-    message: combineResolvers(isAuthenticated, messageResolver)
+    getMessages: combineResolvers(isAuthenticated, messagesResolver),
+    getMessage: combineResolvers(isAuthenticated, messageResolver)
   },
   Mutation: {
     createMessage: combineResolvers(isAuthenticated, createMessageResolver),

@@ -11,8 +11,8 @@ import { isAuthenticated, isAdmin } from '../../shared/resolvers/authorization';
 
 const userResolvers = {
   Query: {
-    users: combineResolvers(isAuthenticated, usersResolver),
-    user: combineResolvers(isAuthenticated, userResolver),
+    getUsers: combineResolvers(isAuthenticated, usersResolver),
+    getUser: combineResolvers(isAuthenticated, userResolver),
     myProfile: combineResolvers(isAuthenticated, myProfileResolver)
   },
   Mutation: {
@@ -22,11 +22,19 @@ const userResolvers = {
     deleteUser: combineResolvers(isAuthenticated, isAdmin, deleteUserResolver)
   },
   User: {
-    messages: async (user, args, { loaders }) => {
-      return (await loaders.userMessage.load(user.id)) || [];
-    },
+    // messages: async (user, args, { loaders }) => {
+    //   return (await loaders.userMessage.load(user.id)) || [];
+    // },
     id: user => {
       return user._id.toString();
+    },
+    activities: user => {
+      return user;
+    }
+  },
+  UserActivities: {
+    bookmarks: async (user, args, { loaders }) => {
+      return (await loaders.userBookmarks.load(user._id)) || [];
     }
   }
 };

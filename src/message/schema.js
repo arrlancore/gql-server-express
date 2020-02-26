@@ -4,13 +4,13 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    messages(
+    getMessages(
       offset: Int
       limit: Int
       cursor: String
       orderBy: String
     ): MessageConnection!
-    message(id: ID!): Message!
+    getMessage(id: ID!): Message!
   }
   extend type Mutation {
     createMessage(text: String!): Message!
@@ -32,14 +32,6 @@ export default gql`
     user: User!
     createdAt: DateTime!
     updatedAt: DateTime!
-  }
-
-  type PageInfo {
-    """
-    end cursor is reffered to createdAt (date) with hash base64
-    """
-    endCursor: String!
-    hasNextPage: Boolean!
   }
 
   type MessageConnection {

@@ -13,10 +13,23 @@ export const isAuthenticated = (parent, args, { user }) => {
   return user ? skip : new ForbiddenError('Not authenticated as user.');
 };
 
+export const isOwner = (parent, args, { user }) => {
+  return user._id === args.createdBy
+    ? skip
+    : new ForbiddenError('Not authenticated as the owner.');
+};
+
+export const isOwnerOrAdmin = (parent, args, { user }) => {
+  const isAllowed = user._id === args.createdBy || user.role === 'ADMIN';
+  return isAllowed
+    ? skip
+    : new ForbiddenError('Not authenticated as the owner.');
+};
+
 export const isMessageOwner = async (parent, { id }, { models, user }) => {
   const message = await models.Message.findByPk(id, { raw: true });
   if (message.userId !== user.id) {
-    throw new ForbiddenError('Not authenticated as owner.');
+    throw new ForbiddenError('Not authenticated as owner of the message.');
   }
   return skip;
 };

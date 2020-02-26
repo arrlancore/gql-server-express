@@ -11,8 +11,8 @@ import {
   DateTimeTypeDefinition
 } from 'graphql-scalars';
 
-import user from '../../user';
-import message from '../../message';
+import appSchemas from '../schemas';
+import appResolvers from '../resolvers';
 
 const dev = process.env.NODE_ENV === 'development';
 
@@ -45,18 +45,9 @@ const linkSchema = gql`
   }
 `;
 
-const typeDefs = [
-  ...customTypeDefScalars,
-  linkSchema,
-  user.userSchema,
-  message.messageSchema
-];
+const typeDefs = [linkSchema, ...customTypeDefScalars, ...appSchemas];
 
-const resolvers = [
-  ...customResolverScalars,
-  user.userResolver,
-  message.messageResolver
-];
+const resolvers = [...customResolverScalars, ...appResolvers];
 
 const apolloServerConfig = () => {
   return {
