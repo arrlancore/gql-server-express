@@ -1,32 +1,62 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:8080/graphql';
 
-export const user = async variables =>
-  axios.post(API_URL, {
-    query: `
-      query ($id: ID!) {
-        user(id: $id) {
-          id
-          role
-          username
-        }
+let savedToken;
+export const loginAndGetToken = async ({ login, password }) => {
+  if (savedToken) return savedToken;
+  const {
+    data: {
+      data: {
+        signIn: { token }
       }
-    `,
-    variables
-  });
+    }
+  } = await signIn({ login, password });
+  savedToken = token;
+  return token;
+};
 
-export const users = async () =>
-  axios.post(API_URL, {
-    query: `
+export const getUser = async (variables, token) =>
+  axios.post(
+    API_URL,
+    {
+      query: `
+          query ($id: ID!) {
+            getUser(id: $id) {
+              id
+              role
+              username
+            }
+          }
+        `,
+      variables
+    },
+    {
+      headers: {
+        'x-token': token
+      }
+    }
+  );
+
+export const getUsers = async token =>
+  axios.post(
+    API_URL,
+    {
+      query: `
       query {
-        users {
+        getUsers {
           id
           role
           username
         }
       }
     `
-  });
+    },
+    {
+      headers: {
+        'x-token': token
+      }
+    }
+  );
 
 export const signIn = async variables =>
   await axios.post(API_URL, {

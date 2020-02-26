@@ -40,12 +40,12 @@ describe('signIn(login: String!, password: String!): String!', () => {
     });
     const error = result.data.errors[0].message;
 
-    expect(error).toEqual('Invalid password.');
+    expect(error).toEqual('Invalid user login or password.');
   });
 });
 
-describe('deleteUser(id: String!): Boolean!', () => {
-  it('returns an error because only admins can delete a user', async () => {
+describe('deleteBookmark(id: String!): Boolean!', () => {
+  it('returns an error because only owner can delete', async () => {
     const {
       data: {
         data: {

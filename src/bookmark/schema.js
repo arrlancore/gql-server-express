@@ -19,7 +19,7 @@ export default gql`
   }
 
   input BookmarkCreateInput {
-    bookmarkCategory: BookmarkInputCategory
+    bookmarkCategory: BookmarkInputCategory!
     bookmarkTitle: String!
     bookmarkSlug: String!
     bookmarkDescription: String

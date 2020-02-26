@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import models from './models';
 import configs from './configs';
-import createUsersWithMessages from '../../seeds/001_testUserMessage';
+import createTestData from '../../seeds/002_testData';
 
 const isTest = process.env.NODE_ENV === 'test';
 const DB_URL = isTest
@@ -25,10 +25,10 @@ const makeTestEnvironment = async () => {
   // clear db
   await Promise.all([
     models.User.deleteMany({}),
-    models.Message.deleteMany({})
+    models.Bookmark.deleteMany({})
   ]);
   // seed data
-  await createUsersWithMessages(models);
+  await createTestData(models);
 };
 
 export default connectToDatabase;
