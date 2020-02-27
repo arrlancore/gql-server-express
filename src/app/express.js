@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
 import configs from './configs';
+import { useOauthGithub } from './oauth';
 
 // init the express app
 const app = express();
@@ -19,5 +20,8 @@ app.use(limiter);
 app.use(cors());
 app.use(helmet());
 app.use(morgan('tiny'));
+
+// OAuth Github
+useOauthGithub(app);
 
 export default app;
