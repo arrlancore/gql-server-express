@@ -15,7 +15,7 @@ export default gql`
   extend type Mutation {
     createBookmark(input: BookmarkCreateInput!): Bookmark!
     deleteBookmark(id: ID!): BookmarkDeletePayload!
-    updateBookmark(id: String!, updates: BookmarkCreateInput!): Message!
+    updateBookmark(id: String!, updates: BookmarkCreateInput!): Bookmark!
   }
 
   input BookmarkCreateInput {

@@ -25,11 +25,3 @@ export const isOwnerOrAdmin = (parent, args, { user }) => {
     ? skip
     : new ForbiddenError('Not authenticated as the owner.');
 };
-
-export const isMessageOwner = async (parent, { id }, { models, user }) => {
-  const message = await models.Message.findByPk(id, { raw: true });
-  if (message.userId !== user.id) {
-    throw new ForbiddenError('Not authenticated as owner of the message.');
-  }
-  return skip;
-};

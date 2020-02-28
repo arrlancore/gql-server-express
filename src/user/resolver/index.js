@@ -22,9 +22,6 @@ const userResolvers = {
     deleteUser: combineResolvers(isAuthenticated, isAdmin, deleteUserResolver)
   },
   User: {
-    // messages: async (user, args, { loaders }) => {
-    //   return (await loaders.userMessage.load(user.id)) || [];
-    // },
     id: user => {
       return user._id.toString();
     },

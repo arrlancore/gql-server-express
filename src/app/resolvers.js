@@ -1,7 +1,6 @@
 import userResolver from '../user/resolver';
-import messageResolver from '../message/resolver';
 import bookmarkResolver from '../bookmark/resolver';
 
-const resolvers = [userResolver, messageResolver, bookmarkResolver];
+const resolvers = [userResolver, bookmarkResolver];
 
 export default resolvers;
