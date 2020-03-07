@@ -12,7 +12,7 @@
     "fix:lint": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
     "seed": "babel-node seeds/index.js",
     "build": "cross-env NODE_ENV=production babel src -d dist",
-    "serve": "cross-env NODE_ENV=production node dist/app/server.js"
+    "serve": "node dist/app/server.js"
   },
   "keywords": [],
   "author": "",
