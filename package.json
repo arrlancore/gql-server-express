@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/app/server.js",
   "scripts": {
-    "start": "nodemon --watch src --exec babel-node src/app/server.js",
-    "start:prod": "npm run build && npm run serve",
+    "dev": "nodemon --watch src --exec babel-node src/app/server.js",
+    "start": "jest && npm run build && npm run serve",
     "test": "jest --runInBand --watch --coverage --verbose",
     "start:test": "cross-env NODE_ENV=test MONGODB_DEBUG=true npm run test:watch",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
