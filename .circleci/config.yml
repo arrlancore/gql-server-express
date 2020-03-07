@@ -11,6 +11,12 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+            - run:
+                command: |
+                  if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                    ./.circleci/setup-heroku.sh
+                    git push heroku HEAD:master
+                  fi
 workflows:
   build-and-test:
     jobs:
