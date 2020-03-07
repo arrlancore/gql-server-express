@@ -17,6 +17,7 @@ const limiter = rateLimit(configs.express.requestLimit);
 
 //  apply to all requests
 app.use(limiter);
+app.disable('x-powered-by');
 app.use(cors());
 app.use(helmet());
 app.use(morgan('tiny'));

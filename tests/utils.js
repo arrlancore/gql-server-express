@@ -1,12 +1,14 @@
+let dbconnection;
+
 import mongoose from 'mongoose';
-import models from './models';
-import configs from './configs';
-import createTestData from '../../seeds/002_testData';
+import createTestData from '../seeds/002_testData';
+import configs from '../src/app/configs';
+import models from '../src/app/models';
 
 const isTest = process.env.NODE_ENV === 'test';
-const DB_URL = isTest
-  ? process.env.TEST_DATABASE_URL
-  : process.env.DATABASE_URL;
+const DB_URL =
+  'mongodb+srv://arrlancore:arrlancore45@cluster0-ojle1.mongodb.net/kodehub-db-test?retryWrites=true&w=majority';
+console.log('DB_URL', DB_URL);
 
 const connectToDatabase = needSeed => {
   mongoose.set('useFindAndModify', false);
@@ -31,4 +33,9 @@ const makeTestEnvironment = async () => {
   await createTestData(models);
 };
 
-export default connectToDatabase;
+export async function startDb() {
+  dbconnection = await connectToDatabase();
+  return {
+    closeConnection: () => dbconnection.close()
+  };
+}

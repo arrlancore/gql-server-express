@@ -1,4 +1,4 @@
-export default async function createTestData(models) {
+module.exports = async function createTestData(models) {
   const user1 = new models.User({
     username: 'awesomeuser',
     createdAt: Date.now(),
@@ -42,4 +42,4 @@ export default async function createTestData(models) {
   await user1.save();
   await user2.save();
   console.log('DATA SEEDED');
-}
+};

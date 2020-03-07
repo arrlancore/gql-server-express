@@ -25,10 +25,10 @@ server.installSubscriptionHandlers(httpServer);
 /**
  * Start the server up
  */
-(async function startServer() {
+async function startServer(seed) {
   try {
     // connecting to database..
-    const mongoose = await connectToDatabase();
+    const mongoose = await connectToDatabase(seed);
     // starting an http server listen by port
     const httpServerConnect = httpServer.listen({ port: APP_PORT }, () => {
       const address = httpServerConnect.address();
@@ -38,8 +38,13 @@ server.installSubscriptionHandlers(httpServer);
     });
     // handler for application level event
     handleNodeEvent(httpServerConnect, mongoose);
+    return httpServerConnect;
   } catch (error) {
     console.error('>>>', error.message);
     console.info(error.stack);
   }
-})();
+}
+
+startServer();
+
+export default startServer;

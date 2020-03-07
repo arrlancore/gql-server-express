@@ -8,6 +8,7 @@ async function startSeed() {
   const mongoose = await connectToDatabase();
 
   // seeding some data
+  console.log('Seeding users data');
   await createUsers(models);
 
   // close connection to the db

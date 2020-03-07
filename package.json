@@ -2,16 +2,17 @@
   "name": "gql-express",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app/index.js",
+  "main": "src/app/server.js",
   "scripts": {
     "start": "nodemon --watch src --exec babel-node src/app/server.js",
-    "start:prod": "cross-env NODE_ENV=production npm start",
-    "test": "jest --coverage",
-    "test:watch": "jest --watch --coverage",
-    "start:test": "cross-env NODE_ENV=test MONGODB_DEBUG=true npm start",
+    "start:prod": "npm run build && npm run serve",
+    "test": "jest --runInBand --watch --coverage --verbose",
+    "start:test": "cross-env NODE_ENV=test MONGODB_DEBUG=true npm run test:watch",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
     "fix:lint": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
-    "seed": "babel-node seeds/index.js"
+    "seed": "babel-node seeds/index.js",
+    "build": "cross-env NODE_ENV=production babel src -d dist",
+    "serve": "cross-env NODE_ENV=production node dist/app/server.js"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +26,6 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.1.1",
-    "github-oauth": "^0.2.2",
     "graphql": "^14.6.0",
     "graphql-depth-limit": "^1.1.0",
     "graphql-resolvers": "^0.4.2",
@@ -39,22 +39,24 @@
     "uuid": "^3.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.6",
     "@babel/node": "^7.8.4",
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-env": "^7.8.7",
     "axios": "^0.19.2",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^25.1.0",
     "cross-env": "^7.0.0",
     "eslint": "^6.8.0",
     "jest": "^25.1.0",
     "jest-cli": "^25.1.0",
     "jest-runner-eslint": "^0.7.6",
+    "mongodb-memory-server": "^6.3.2",
     "nodemon": "^2.0.2"
   },
   "jest": {
     "testEnvironment": "node",
-    "resetModules": true,
     "testPathIgnorePatterns": [
       "/node_modules/",
       "./dist"

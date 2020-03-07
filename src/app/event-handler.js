@@ -20,7 +20,7 @@ function handleNodeEvent(serverApp, mongoose) {
   });
 }
 
-function stopServer(server, mongoose) {
+export function stopServer(server, mongoose) {
   console.log('Closing http server.');
   server.close(() => {
     console.log('Http server closed.');

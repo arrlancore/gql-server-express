@@ -1,8 +1,8 @@
-export const usersResolver = (parent, args, { models }) => {
-  return models.User.find();
+export const getUsersResolver = (parent, args, { models }) => {
+  return models.User.find({}, null, { sort: '-createdAt' });
 };
 
-export const userResolver = (parent, { id }, { models }) => {
+export const getUserResolver = (parent, { id }, { models }) => {
   return models.User.findById(id);
 };
 

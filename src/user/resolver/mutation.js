@@ -23,10 +23,11 @@ export const signInResolver = async (
 };
 
 export const updateUserResolver = async (parent, { input }, { models }) => {
-  const { id, ...rest } = input;
-  const updates = rest;
+  const { id, ...updates } = input;
+
+  // user should not be able to update password on this resolver
   if (updates.password) {
-    updates.password = await utils.generateUserPasswordHash(rest.password);
+    delete updates.password;
   }
   return models.User.findOneAndUpdate({ _id: id }, updates);
 };
@@ -34,7 +35,7 @@ export const updateUserResolver = async (parent, { input }, { models }) => {
 export const deleteUserResolver = async (parent, { id }, { models }) => {
   let hasDeleted = false;
   const deleteStatus = await models.User.deleteOne({ _id: id });
-  if (deleteStatus) {
+  if (deleteStatus.deletedCount) {
     hasDeleted = true;
   }
   return hasDeleted;

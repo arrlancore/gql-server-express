@@ -1,4 +1,4 @@
-export default async function createUsersWithMessages(models) {
+module.exports = async function createUsersWithMessages(models) {
   const user1 = new models.User({
     username: 'awesomeuser',
     createdAt: Date.now(),
@@ -39,4 +39,4 @@ export default async function createUsersWithMessages(models) {
   await user1.save();
   await user2.save();
   console.log('DATA SEEDED');
-}
+};

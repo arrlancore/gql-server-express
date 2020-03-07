@@ -1,6 +1,6 @@
 'use strict';
 import { combineResolvers } from 'graphql-resolvers';
-import { usersResolver, myProfileResolver, userResolver } from './query';
+import { getUsersResolver, myProfileResolver, getUserResolver } from './query';
 import {
   signUpResolver,
   signInResolver,
@@ -11,8 +11,8 @@ import { isAuthenticated, isAdmin } from '../../shared/resolvers/authorization';
 
 const userResolvers = {
   Query: {
-    getUsers: combineResolvers(isAuthenticated, usersResolver),
-    getUser: combineResolvers(isAuthenticated, userResolver),
+    getUsers: combineResolvers(isAuthenticated, getUsersResolver),
+    getUser: combineResolvers(isAuthenticated, getUserResolver),
     myProfile: combineResolvers(isAuthenticated, myProfileResolver)
   },
   Mutation: {
