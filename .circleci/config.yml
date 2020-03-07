@@ -1,18 +1,12 @@
 version: 2.1
-description: 'Deploying Node.js Docker to Heroku'
-
+orbs:
+  node: circleci/node@1.1.6
 jobs:
   build-and-test:
-    docker:
-      - image: circleci/node:12
     executor:
       name: node/default
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies- # fallback to using the latest cache if no exact match is found
       - node/with-cache:
           steps:
             - run: npm install
