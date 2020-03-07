@@ -1,6 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
 set -eu
+
+# Exit script if you try to use an uninitialized variable.
+set -o nounset
+
+# Exit script if a statement returns a non-true return value.
+set -o errexit
+
+# Use the error status of the first failure, rather than that of the last item in a pipeline.
+set -o pipefail
 
 git remote add heroku https://git.heroku.com/$HEROKU_APP_NAME.git
 
