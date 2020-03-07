@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import http from 'http';
 import { ApolloServer } from 'apollo-server-express';
-import apolloServerConfig from './configs/apollo-server';
+import apolloServerConfig from './apollo-server';
 import connectToDatabase from './mongoose';
 import { normalizePort } from '../shared/utils/normalize';
 import app from './express';

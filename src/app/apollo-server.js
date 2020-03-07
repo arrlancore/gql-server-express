@@ -1,9 +1,9 @@
 'use strict';
 import depthLimit from 'graphql-depth-limit';
-import allDataLoader from '../dataloaders';
-import { getUserByToken } from '../../shared/utils/jwt';
+import allDataLoader from './dataloaders';
+import { getUserByToken } from '../shared/utils/jwt';
 import { gql } from 'apollo-server-express';
-import models from '../models';
+import models from './models';
 import {
   EmailAddressResolver,
   EmailAddressTypeDefinition,
@@ -11,8 +11,8 @@ import {
   DateTimeTypeDefinition
 } from 'graphql-scalars';
 
-import appSchemas from '../schemas';
-import appResolvers from '../resolvers';
+import appSchemas from './schemas';
+import appResolvers from './resolvers';
 
 const dev = process.env.NODE_ENV === 'development';
 
