@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/app/server.js",
+  "engines": {
+    "node": ">=10.0.0 <=12.16.1"
+  },
   "scripts": {
     "dev": "nodemon --watch src --exec babel-node src/app/server.js",
-    "start": "jest && npm run build && npm run serve",
+    "start": "node dist/app/server.js",
     "test": "jest --runInBand --coverage --verbose",
     "start:test": "cross-env NODE_ENV=test MONGODB_DEBUG=true npm run test:watch",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
     "fix:lint": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
     "seed": "babel-node seeds/index.js",
-    "build": "cross-env NODE_ENV=production babel src -d dist",
-    "serve": "node dist/app/server.js"
+    "build": "cross-env NODE_ENV=production babel src -d dist"
   },
   "keywords": [],
   "author": "",
