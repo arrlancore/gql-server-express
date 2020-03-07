@@ -42,6 +42,8 @@ describe('getUsersResolver', () => {
     const user1 = new User(_doc1);
     const user2 = new User(_doc2);
     await user1.save();
+    // set delay it can be short by createdAt
+    await setTimeout(() => {}, 100);
     await user2.save();
 
     // get users
